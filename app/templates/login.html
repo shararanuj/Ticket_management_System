@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://cms.cloudinary.vpsvc.com/images/c_scale,dpr_auto,f_auto,q_auto:best,t_productPageHeroGalleryTransformation_v2,w_auto/legacy_dam/en-ie/S001535078/MXP-5976-ticket-T3-001?cb=cf71807559ef8f4dbddece61027d24a22333d14b');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-70">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+        <h2 class="text-3xl font-semibold text-center text-gray-800 mb-4">Login</h2>
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="block text-gray-600">Username</label>
+                <input type="text" name="username" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div>
+                <label class="block text-gray-600">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="submit" class="w-full py-2 mt-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Login</button>
+        </form>
+        <p class="text-center text-gray-600 mt-4">Don't have an account?</p>
+        <a href="{% url 'register' %}" class="w-full py-2 mt-2 block text-center text-blue-600 hover:text-blue-700 font-semibold">Register</a>
+    </div>
+</body>
+</html>
+

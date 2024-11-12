@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Ticket</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2023/12/21/07/39/christmas-baubles-8461383_1280.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .bg-overlay {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100 bg-opacity-80">
+    <div class="bg-overlay p-8 rounded-lg shadow-lg w-full max-w-lg">
+        <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">Create a New Ticket</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-1" for="title">Title</label>
+                <input type="text" id="title" name="title" required 
+                    class="w-full p-3 border rounded-lg text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none" 
+                    placeholder="Enter ticket title">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-1" for="description">Description</label>
+                <textarea id="description" name="description" required 
+                    class="w-full p-3 border rounded-lg text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none" 
+                    placeholder="Describe the issue or request"></textarea>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-1" for="priority">Priority</label>
+                <select id="priority" name="priority" required 
+                    class="w-full p-3 border rounded-lg text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none">
+                    <option value="" disabled selected>Select priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-1" for="assigned_users">Assign to</label>
+                <select id="assigned_users" name="assigned_users" multiple required 
+                    class="w-full p-3 border rounded-lg text-gray-700 focus:ring focus:ring-blue-300 focus:outline-none">
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+                <p class="text-sm text-gray-500 mt-1">Hold down Ctrl (Windows) or Command (Mac) to select multiple users.</p>
+            </div>
+            <div class="text-center">
+                <button type="submit" 
+                    class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 focus:ring focus:ring-blue-300 transition duration-200">
+                    Create Ticket
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

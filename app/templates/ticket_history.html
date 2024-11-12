@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Ticket History</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto">
+        <h1 class="text-3xl font-semibold mb-6">All Ticket History</h1>
+        
+        <table class="min-w-full bg-white border border-gray-300 shadow-md">
+            <thead>
+                <tr>
+                    <th class="py-2 px-4 border-b">SR No.</th>
+                    <th class="py-2 px-4 border-b">Ticket Title</th>
+                    <th class="py-2 px-4 border-b">Priority</th>
+                    <th class="py-2 px-4 border-b">Creator</th>
+                    <th class="py-2 px-4 border-b">Assigned To</th>
+                    <th class="py-2 px-4 border-b">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in ticket_data %}
+                    <tr>
+                        <td class="py-2 px-4 border-b">{{ ticket.sr_no }}</td>
+                        <td class="py-2 px-4 border-b">{{ ticket.title }}</td>
+                        <td class="py-2 px-4 border-b">{{ ticket.priority }}</td>
+                        <td class="py-2 px-4 border-b">{{ ticket.creator }}</td>
+                        <td class="py-2 px-4 border-b">{{ ticket.assigned_to }}</td>
+                        <td class="py-2 px-4 border-b">{{ ticket.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+

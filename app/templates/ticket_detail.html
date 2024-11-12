@@ -1,0 +1,44 @@
+<!-- templates/ticket_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Details</title>
+</head>
+<body>
+    <h2>Ticket Details</h2>
+    <p><strong>Title:</strong> {{ ticket.title }}</p>
+    <p><strong>Description:</strong> {{ ticket.description }}</p>
+    <p><strong>Priority:</strong> {{ ticket.priority }}</p>
+    <p><strong>Status:</strong> {{ ticket.status }}</p>
+
+    <h3>Activities</h3>
+    <ul>
+        {% for activity in ticket.activity_set.all %}
+            <li>{{ activity.user.username }} - {{ activity.action }} ({{ activity.created_at }})</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Add Activity</h3>
+    <form method="POST" action="{% url 'add_activity' ticket.id %}">
+        {% csrf_token %}
+        <textarea name="action" placeholder="Add a comment or update" required></textarea>
+        <br>
+        <button type="submit">Add Activity</button>
+    </form>
+
+    <h3>Change Status</h3>
+    <form method="POST" action="{% url 'update_ticket_status' ticket.id %}">
+        {% csrf_token %}
+        <select name="status" required>
+            <option value="Open" {% if ticket.status == "Open" %}selected{% endif %}>Open</option>
+            <option value="In Progress" {% if ticket.status == "In Progress" %}selected{% endif %}>In Progress</option>
+            <option value="Resolved" {% if ticket.status == "Resolved" %}selected{% endif %}>Resolved</option>
+            <option value="Closed" {% if ticket.status == "Closed" %}selected{% endif %}>Closed</option>
+        </select>
+        <br>
+        <button type="submit">Update Status</button>
+    </form>
+</body>
+</html>

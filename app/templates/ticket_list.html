@@ -1,0 +1,28 @@
+<!-- templates/ticket_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket List</title>
+</head>
+<body>
+    <h2>My Tickets</h2>
+    <table border="1">
+        <tr>
+            <th>Title</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.title }}</td>
+                <td>{{ ticket.priority }}</td>
+                <td>{{ ticket.status }}</td>
+                <td><a href="{% url 'ticket_detail' ticket.id %}">View Details</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

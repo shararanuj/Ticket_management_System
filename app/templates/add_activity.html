@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Activity Tracking</title>
+</head>
+<body>
+    <h1>Ticket Activity Tracking</h1>
+    <h2>Ticket: {{ ticket.title }}</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        <label for="comment">Add Activity / Comment:</label><br>
+        <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+        <button type="submit">Add Activity</button>
+    </form>
+
+    <h3>Activity History:</h3>
+    <ul>
+        {% for activity in ticket.activity_set.all %}
+            <li>{{ activity.timestamp }} - {{ activity.user }}: {{ activity.comment }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
